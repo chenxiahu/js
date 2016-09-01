@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+body{
+	margin:0px;
+	padding:0px;
+	}
+	#mycanvas{
+	border:1px solid #0F3;
+	background-color:#936;
+	}
+</style>
+<script>
+function wrapText(context,text,x,y,maxWidth,lineHeight){
+	 var words=text.split(" ");
+	 var  line="";
+	 for(var n=0;n<words.length;n++){
+		 var testLine=line+words[n]+" ";
+		 var meters=context.measureText(testLine);
+		 var testWidth=meters.width; 
+		 if(testWidth>maxWidth){
+			context.fillText(line,x,y);
+			line=words[n]+'';
+			y+=lineHeight;
+			 }else{
+				 line=testLine;
+				 }
+	 }
+	 context.fillText(line,x,y);
+	};
+window.onload=function(){
+	 var canvas=document.getElementById('mycanvas');
+	 var context=canvas.getContext('2d');
+	 var text="All the world a stage,and all the men and woman "
+	 +"merely players. They have their exits and their entrances And one man in"+
+	 "his time plays many parts";
+	 var maxWidth=400;
+	 var lineHeight=25;
+	 var x=(canvas.width-maxWidth)/2;
+	 var y=60;
+	 context.font="16px Arial";
+	 context.fillStyle='#333';
+	 wrapText(context,text,x,y,maxWidth,lineHeight);
+	}
+</script>
+</head>
+
+<body>
+<canvas id="mycanvas" width="500" height="200"></canvas>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function years(obj, Cyear) {
+    var len = 114; // select长度,即option数量
+    var selObj = document.getElementById(obj);
+    var selIndex = len - 1;
+    var newOpt; // OPTION对象
+
+    // 循环添加OPION元素到年份select对象中
+    for (i = 1; i <= len; i++) {
+        if (selObj.options.length != len) { // 如果目标对象下拉框升度不等于设定的长度则执行以下代码
+            newOpt = window.document.createElement("OPTION"); // 新建一个OPTION对象
+            newOpt.text = Cyear - len + i; // 设置OPTION对象的内容
+            newOpt.value = Cyear - len + i; // 设置OPTION对象的值
+            selObj.options.add(newOpt, i); // 添加到目标对象中
+        }
+
+    }
+}
+
+function months(){
+    var month = document.getElementById("month");
+    month.length = 0; 
+    for (i = 1; i < 13; i++) { 
+        month.options.add(new Option(i, i)); 
+    }
+   
+}
+
+
+function change_date(){ 
+   // var birthday = document.birthday; 
+    var year  = document.getElementById("year"); 
+    var month = document.getElementById("month"); 
+    var date = document.getElementById("date"); 
+    vYear  = parseInt(year.value); 
+    vMonth = parseInt(month.value); 
+    date.length=0; 
+     
+    //根据年月获取天数 
+    var max = (new Date(vYear,vMonth, 0)).getDate(); 
+    for (var i=1; i <= max; i++) { 
+        date.options.add(new Option(i, i)); 
+    } 
+}
+</script>
+<tr>
+    <td>&nbsp;&nbsp;出生年份：</td><td>
+  　　　　<select size="1" name="year" id="year" style="width:55px" onfocus="years('year',new Date().getFullYear()),change_date()" 
+　　　　　　　onchange="change_date()"></select>&nbsp;
+  　　　　<select size="1" name="month" id="month" style="width:40px" onfocus="months(),change_date()" onchange="change_date()"></select>&nbsp;
+ 　　　　 <select size="1" name="date" id="date" style="width:40px" ></select>
+  </td>
+  
+</tr>
+
+</body>
+</html>

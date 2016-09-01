@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+window.onload=function(){
+var oTab=document.getElementById('tab1');
+var data=[{"name":"zy","age":"20"},{"name":"smith","age":"21"},{"name":"Tom","age":"22"}];
+for(var i in data)
+{
+	         var Tr=document.createElement('tr');
+			 var Td=document.createElement('td');
+		     Td.innerHTML=oTab.tBodies[0].rows.length+1;
+			 Tr.appendChild(Td);
+			 var Td=document.createElement('td');
+			 Td.innerHTML=data[i].name;
+			 Tr.appendChild(Td);
+			 var Td=document.createElement('td');
+			 Td.innerHTML=data[i].age;
+			 Tr.appendChild(Td);
+		     oTab.tBodies[0].appendChild(Tr);
+	}
+}
+</script>
+<table id="tab1" border="2px" bgcolor="#CC3399">
+<tbody>
+</tbody>
+</table>
+ </body>
+</html>

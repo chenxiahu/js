@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>参数传递</title>
+<script>
+function Animal(group,gender){
+	this.group=group;
+	this.gender=gender;
+	}
+	Animal.prototype.showInfo=function(){
+		document.write("类别："+this.group+"性别:"+this.gender+'<br>');
+		}
+		function layEggs(){
+			this.buildNest=function(){};
+			this.lay=function(number){};
+			}
+			function Bird(group,gender){
+				 layEggs.call(this);
+				 Animal.call(this,group,gender);
+				}
+				Bird.prototype=new Animal();
+				Bird.prototype.constructor=Bird;
+				var b1=new Bird("喜鹊","雌");
+				b1.buildNest=function(){
+					document.write(this.group+"建巢"+'<br>');
+					}
+					b1.buildNest();
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function Person(name,age){
+	this.name=name;
+	this.age=age;
+	}
+Person.prototype={
+	 showInfo:function(){
+		 document.write("name:"+this.name+"年龄："+this.age);
+		 }
+	}
+function Emp(name,age,salary){
+	Person.call(this,name,age);
+	this.salary=salary;
+	}
+Emp.prototype=new Person();
+Emp.prototype.pay=function(){
+	document.write("name:"+this.name+"年龄"+this.age+"工资："+this.salary);
+	}
+	var p=new Emp("smith",20,4000);
+	p.pay();
+	p.showInfo();
+</script>
+</body>
+</html>

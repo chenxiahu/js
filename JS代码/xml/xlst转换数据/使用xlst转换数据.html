@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<p id="result"></p>
+<script>
+ function loadXML(file){
+	  try{
+		  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+		  xmlDoc.async=false;
+		  xmlDoc.load(file);
+		  }
+		  catch(e){
+			   try{
+				   xmlDoc=document.implementation.createDocument("","",null);
+				   xmlDoc.async=false;
+				   xmlDoc.load(file);
+				   }
+				   catch(e){
+					   try{
+					   var xmlhttp=new window.XMLHttpRequest();
+					   xmlhttp.open("GET",file,false);
+					   xmlhttp.send(null);
+					   xmlDoc=xmlhttp.responseXML.documentElement;
+					   }
+					   catch(e){
+						   alert("您的浏览器不能正常加载文件，请切换到兼容模式，或者更换浏览器");
+						   }
+				   }
+					   
+			  }
+			 return xmlDoc;
+	  
+	  }
+		 
+ 
+var xmlDOM=loadXML("data.xml");
+var xslDOM=loadXML("xsl.xml");
+//code fOR IE
+
+	if('\v'=='v'){
+		var resultDocument=xmlDOM.transformNode(xslDOM);
+		document.getElementById('result').innerHTML=resultDocument;
+	}else if(document.implementation&&document.implementation.createDocument){
+	    xsltProcessor=new XSLTProcessor();//xslt处理器
+		xsltProcessor.importStylesheet(xslDOM);//引入样式表
+		var resultDocument=xsltProcessor.transformToFragment(xmlDOM,document);
+		document.getElementById('result').appendChild(resultDocument);
+	}
+</script>
+</body>
+</html>

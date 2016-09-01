@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+body{
+	margin:0px;
+	padding:0px;
+	}
+	#mycanvas{
+	border:1px solid #0F3;
+	background-color:#936;
+	}
+</style>
+<script>
+window.onload=function(){
+var canvas=document.getElementById('mycanvas');
+var context=canvas.getContext('2d');
+ var rectWidth=150;
+ var rectHeight=75;
+ context.save();
+ context.translate(canvas.width/2,canvas.height/2);
+ context.save();
+ context.rotate(Math.PI/4);
+ context.save();
+ context.scale(2,2);
+ context.fillStyle='blue';
+ context.fillRect(-rectWidth/2,-rectHeight/2,rectWidth,rectHeight);
+ context.restore();
+ context.fillStyle='red';
+ context.fillRect(-rectWidth/2,-rectHeight/2,rectWidth,rectHeight);
+ context.restore();
+ context.fillStyle="yellow";
+ context.fillRect(-rectWidth/2,-rectHeight/2,rectWidth,rectHeight);
+ context.restore();
+ context.fillStyle="green";
+ context.fillRect(-rectWidth/2,-rectHeight/2,rectWidth,rectHeight);
+};
+</script>
+</head>
+
+<body>
+<canvas id="mycanvas" width="500" height="200"></canvas>
+</body>
+</html>

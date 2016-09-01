@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+keydown和keypress两个都是先触发的事件
+<input type="text" id="txt"/>
+<script>
+window.onload=function(){
+var txt=document.getElementById('txt');
+/*txt.onkeydown=function(){
+	 alert("keydown事件被促发"); 
+	};*/
+	
+	
+txt.onkeypress=function(){
+	 alert("onkeypress促发事件");
+	}
+}
+</script>
+</body>
+</html>

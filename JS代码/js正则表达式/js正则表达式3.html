@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js正则表达式3</title>
+</head>
+
+<body>
+<!--/*.:任意字符
+\.:字符点
+\b:独立的部分，包括开始，结束和空格
+\B ：非独立的部分
+匹配子项
+重复子项
+\1第一个子项
+\2第二个子项*/-->
+<script>
+<!--var str="abc.b";
+/*var reg1=/\.+/;
+console.log(reg1.test(str));
+var reg=/(a)(b)(c)\1/;
+console.log(reg.test(str));*/
+-->//匹配成双成对的标签（\w+）
+var str1="asasdasdggdghaaaa";
+var arr=str1.split("");
+//console.log(arr);
+arr.sort();
+console.log(arr);
+str1=arr.sort().join("");
+console.log(str1); 
+var value="";
+var num=0;
+reg=/(\w)\1+/g;
+str1.replace(reg,function($0,$1){
+	   if(num<$0.length)
+	   {
+		   num=$0.length;
+		   value=$1;
+		   }
+	});
+	document.write("出现最多字符是："+value+"一共出现了"+num+"次");
+</script>
+</body>
+</html>

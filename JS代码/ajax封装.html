@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function addUrlParam(url,name,value){
+		  url+=(url.indexOf("?"==-1?"?":"&"));
+		  url+=encodeURIComponent(name)+'='+encodeURIComponent(value);
+		  return url;
+		  }
+  function serialize(form){
+			var parts=new Array();
+			var field=null;
+			for(var i=0,len=form.elements.length;i<len;i++){
+				 field=form.elements[i];
+				 switch(field.type){
+					 case 'select-one':
+					 case 'select-multiple':
+					 for(var j=0 ,optLen=field.options.length;j<optLen;j++){
+						 var option=field.options[j];
+						 if(option.selected){
+							 var optValue='';
+							 if(option.hasAttribute){
+								 optValue=(option.hasAttribute('value')?option.value:option.text);
+								 }
+								 else{
+									  optValue=(option.attributes['value'].specified?option.value:option.text);
+									 }
+								parts.push(encodeURIComponent(field.name)+'='+encodeURIComponent(optValue));	 
+							   }
+					         }
+							 break;
+							 case undefined:
+							 case 'file':
+							 case 'submit':
+							 case 'reset':
+							 case 'button':
+							 case 'radio':
+							 case 'checkbox':
+							 if(!field.checked){
+								 break;
+								 }
+								 default:
+								 parts.push(encodeURIComponent(field.name)+'='+encodeURIComponent(field.vlaue));
+						 }
+			            
+						}           
+					 return parts.join("&");
+				 
+			}
+	 function show(){
+		 var form=document.myform;
+		 var result=serialize(form);
+		 alert(result);
+		 }
+</script>
+<form name="myform">
+  <p>学生名：<input type="text" name="sname"></p>
+  <p>性别：<input type="radio" name="sex" value="男">男
+  <input type="radio" name="sex">女</p>
+  <p>兴趣爱好：<input type="checkbox" name="ins" value="篮球">篮球 
+  <input type="checkbox" name="ins" value="swim">swim</p>
+  <p>想去的地方：<select name="places" multiple>
+       <option value="北京">北京</option>
+       <option value="长沙">长沙</option>
+       <option value="上海">上海</option>
+       <option value="广州">广州</option>
+       </select>
+       </p>
+       <p>学生密码：<input type="password" name="pwd"/></p>
+       <p><input type="button" onClick="show()"/></p>
+</form>
+</body>
+</html>

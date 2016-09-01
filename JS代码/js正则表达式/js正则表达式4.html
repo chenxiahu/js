@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>js正则表达式</title>
+</head>
+
+<body>
+<pre>
+量词：规定出现的次数{} {3}：出现3次 {4,8}出现4-8之间  {4,}出现四次以上    {,4}最多4次
++:出现至少一次，最多无限{1,}
+?:出现0次或者一次{0,1}
+*:任意一个，至少出现0次{0,}
+</pre>
+ <script>
+ var str="    ycinfo    ";
+ reg=/^\s+|\s+$/g;
+ 
+ 
+ str.replace(reg,"");
+document.write(str);
+ </script>
+</body>
+</html>

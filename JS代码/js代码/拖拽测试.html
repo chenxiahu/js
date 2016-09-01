@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1{width:200px;height:200px;background:#CC0;position:absolute;}
+#div2{width:200px;height:200px;background:#C3C;position:absolute;}
+</style>
+ <script src="拖拽.js"></script>
+ <script src="拖拽2.js"></script>
+ <script>
+ window.onload=function(){
+	  new Drag('div1');
+	  new LimitDrag('div2');
+	 }
+ </script>
+</head>
+
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>

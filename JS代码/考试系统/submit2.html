@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+var score=location.hash;
+score=score.replace("#","");
+var result=score=score.split("_");
+document.write("你的成绩是（总分为）"+result[0]+"分"+result[1]+"分");
+</script>
+</body>
+</html>

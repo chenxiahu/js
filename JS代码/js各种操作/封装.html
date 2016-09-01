@@ -1,0 +1,112 @@
+<!DOCTYPE html >
+<head>
+<meta  charset="utf-8" />
+<title>闭包的应用--封装</title>
+</head>
+
+<body>
+<script>
+var StringBuffer=(
+function(){
+	 var arr=new Array();
+	 return{
+		 value:function(){
+			 return arr.join('-');
+			 },
+			 append:function(val){
+				 arr[arr.length]=val;
+				 },
+		 }
+	}
+)();
+document.write('原始字符串：'+StringBuffer.value()+'<br>');
+StringBuffer.append('hello');
+StringBuffer.append('world');
+document.write('添加后的字符串：'+StringBuffer.value()+'<br>');
+</script>
+<hr>
+<script>
+  var mynext=selfNext([1,2,3,4]);
+  function selfNext(arr)
+  {
+	  var index=0;
+	   return function(){
+		 return arr[index++];
+	  }
+	  }
+	  document.write(mynext()+'<br>');
+	  document.write(mynext()+'<br>');
+      document.write(mynext()+'<br>');
+   document.write(mynext()+'<br>');
+
+</script>
+<hr>
+<script>
+var person={name:'zy',age:20};
+person.sex='male';
+ person.showInfo=function(){
+	 document.write('信息为：');
+	 showInfoInObject(this);
+	 }
+	 showInfoInObject(person);
+	 function showInfoInObject(obj){
+		 for(var key in obj)
+		 {
+			 document.write(key+':'+obj[key]+'<br>');
+			 }
+		 };
+		 //修改成员
+		 person.showInfo=function(){
+			 document.write('当前对象信息为：');
+			 showInfoInObject(this);
+			 };
+		 	 showInfoInObject(person);
+			 //删除成员	
+			 delete person['sex']; 
+			  showInfoInObject(person);
+</script>
+<hr>
+<script>
+var a={name:'zy',age:20};
+Object.prototype.clone=function()
+{
+	var newobj={};
+	for(var key in this)
+	{
+		newobj[key]=this[key];
+		}
+		return newobj;
+	}
+	var newA=a.clone();
+	document.write(a.name+'<BR>');
+	document.write(newA.name+'<BR>');
+</script>
+ <hr>
+ <script>
+ //对象比较
+ Object.prototype.equals=function(obj){
+	 var result=false;
+	 if(!obj)
+	 {
+		 return result;
+		 }
+		 for(var key in obj){
+			 if(!obj[key]||!this[key]||obj[key]!=this[key]){
+				 return result;
+				 }
+			 }
+		   for(var key in this){
+			if(!obj[key]||!this[key]||obj[key]!=this[key]){
+				 return result;
+				 }
+			 }
+			 result=true;
+			 return result;
+	 }
+	 a={name:'chen',age:21};
+	 b={name:'chen',age:21};
+	 document.write( a==b+'<br>');
+	 document.write(a.equals(b));
+ </script>
+</body>
+</html>

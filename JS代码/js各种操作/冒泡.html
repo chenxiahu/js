@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="oDiv">
+<p id="oP">
+<span  id="oSpan" >请点击我</span>
+</p></div>
+<script>
+var oDiv=document.getElementById('oDiv');
+var oP=document.getElementById('oP');
+var oSpan=document.getElementById('oSpan');
+//从低级到高级
+/*oDiv.onclick=function(){
+  alert('oDiv被点击了');
+ }
+	oP.onclick=function(){
+  alert('oP被点击');
+	}
+	oSpan.onclick=function(){
+  alert('oSpan被点击');
+	}*/
+	//从高级到低级
+oDiv.addEventListener('click',function(){
+	console.log('div被点击，事件捕获');
+	},true);
+oP.addEventListener('click',function(){
+	console.log('oP被点击，事件捕获');
+	},true);
+oSpan.addEventListener('click',function(){
+	console.log('oSpan被点击，事件捕获');
+	},true);
+oDiv.addEventListener('click',function(){
+	console.log('div被点击，事件捕获');
+	},false);
+oP.addEventListener('click',function(){
+	console.log('oP被点击，事件捕获');
+	},false);
+oSpan.addEventListener('click',function(){
+	console.log('oSpan被点击，事件捕获');
+	},false);
+</script>
+</body>
+</html>

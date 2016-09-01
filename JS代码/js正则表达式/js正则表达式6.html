@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var str='12  ffff 87 er334 233 -=-=dfa80';
+var arr=[];
+var temp='';
+for(var i=0;i<str.length;i++){
+	if(str.charAt(i)>='0'&& str.charAt(i)<='9'){
+		temp+=str.charAt(i);
+		}
+	else{
+		 if(temp){
+			 arr.push(temp);
+			 temp='';
+			 }
+		}
+	
+	}
+//if(temp){
+//			 arr.push(temp);
+//			 temp='';
+//			 }
+alert(arr);
+</script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html >
+<head>
+<meta  charset="utf-8" />
+<title>原型操作</title>
+<script>
+function Person(name,age)
+{
+	this.name=name;
+	this.age=age;
+	}
+	/*Person.prototype.sayHi=function(name)
+	{
+		document.write('hello'+name+'<br>');
+		}*/
+		Person.prototype={
+			sayBye:function(name){
+				document.write(this.name+'bye'+name+'<br>');
+				},
+				eat:function(foods){
+				   document.write(this.name+'eat'+foods+'<br>');	
+					}
+			};
+			var p1=new Person('张三',30);
+			p1.sayBye('smith');
+			Person.prototype.sayBye=function(name){
+				document.write(this.name+'say bye to'+name);
+				}
+				p1.sayBye('zhangsan');
+</script>
+</head>
+
+
+<body>
+</body>
+</html>

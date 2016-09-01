@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<canvas id="mycanvas" width="800px" height="800px"></canvas>
+<script>
+function Point(x,y){
+	 this.x=x;
+	 this.y=y;
+	}
+function Shape(){
+	 this.points=[];
+	 this.init();
+	}
+Shape.prototype={
+	  init:function(){
+		  if((typeof this.context)=='undefined'){
+		  var canvas=document.getElementById('mycanvas');
+		  this.context=canvas.getContext('2d');
+		  }
+		  },
+	 draw:function(){
+		  var ctx=this.context;
+		  ctx.strokeStyle=this.getColor();
+		  ctx.beginPath();
+		  ctx.moveTo(this.points[0].x,this.points[0].y);
+		  for(var i=0;i<this.points.length;i++){
+			  ctx.lineTo(this.points[i].x,this.points[i].y);
+			  }
+		 ctx.closePath();
+		 ctx.stroke();
+		 },
+	 getColor:function(){
+		 var cs=[];
+		 for(var i=0;i<3;i++){
+			 cs[i]=Math.round(Math.random()*255);
+			 }
+			return 'rgb('+cs.join(',')+')';
+		 },
+	 getPoints:function(){
+		 return this.points;
+		 }
+	}
+ function Triangle(p1,p2,p3){
+	 this.points=[p1,p2,p3];
+	 }
+ Triangle.prototype=new Shape();
+ var p1=new Point(200,300);
+ var p2=new Point(400,600);
+ var p3=new Point(220,300);
+ var t=new Triangle(p1,p2,p3);
+ t.draw();
+</script>
+ 
+</body>
+</html>

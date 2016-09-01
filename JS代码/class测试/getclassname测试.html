@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+.a{
+	color:red;}
+</style>
+<script src="yclib.js">
+</script>
+<script>
+function init(){
+	//alert(yc.getClassNames('ab'));
+	yc.addClassName('ab','a');
+	//alert(yc.hasClassName('ab','a'));
+	yc.removeClassName('ab','a');
+	//alert(yc.getClassNames('ab'));
+	}
+</script>
+</head>
+
+<body onLoad="init()">
+<p id="ab" class="f e g">ppppp</p>
+</body>
+</html>

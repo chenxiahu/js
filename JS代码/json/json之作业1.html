@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="file:///C|/Users/chen_xiahui/Documents/JS/JS代码/yclib.js">
+</script>
+
+</head>
+
+<body>
+<div id="mydiv"></div>
+<script>
+var template='<table border="{border}">'+
+'<tr><th>Last</th><td>{last}</td></tr>'+
+'<tr><th>First</th><td>{first}</td></tr>'+'</table>';
+var data={
+	"first":"Carl",
+	"last":"hellywood",
+	"border":10
+	};
+  yc.$('mydiv').innerHTML=yc.supplant(template,data);
+ </script>
+ 
+</body>
+</html>

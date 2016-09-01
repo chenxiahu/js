@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="yclib.js">
+</script>
+</head>
+
+<body>
+<p id="a">a</p>
+<p id="b">b</p>
+<p id="c">ccc</p>
+<script>
+var newnode=document.createElement('p');
+var txtnode=document.createTextNode('hello');
+newnode.appendChild(txtnode);
+yc.insertAfter(newnode,yc.$('b'));
+</script>
+</body>
+</html>

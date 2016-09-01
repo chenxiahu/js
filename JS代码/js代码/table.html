@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+window.onload=function(){
+         var data=[{"name":"zy","age":"20","sex":"女"},{"name":"smith","age":"21","sex":"男"},{"name":"Tom","age":"22","sex":"男"}];
+
+	// var data=[{"name":"zy","age":"20"},{"name":"smith","age":"21"}];
+       var t=document.createElement('table');
+	   var d=document.createElement('tbody');
+	   for(var i in data){
+		       var tr=document.createElement('tr');
+			   var td=document.createElement('td');
+			   var text = document.createTextNode(data[i].name);
+			   tr.appendChild(td);
+			   td.appendChild(text);
+			   var td=document.createElement('td');
+			   var text = document.createTextNode(data[i].age);
+	           td.appendChild(text);
+			   tr.appendChild(td);
+			   var td=document.createElement('td');
+			   var text = document.createTextNode(data[i].sex);
+	           td.appendChild(text);
+			   tr.appendChild(td);
+			   d.appendChild(tr);
+			    
+		   }
+	  t.appendChild(d);
+	  document.getElementById('table1').appendChild(t);
+      t.setAttribute('border', '1');
+  
+}
+</script>
+ <table id="table1"></table>
+</body>
+</html>

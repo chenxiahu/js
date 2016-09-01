@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#canvas{margin:0px auto;
+   display:block;
+ }
+</style>
+
+</head>
+
+<body>
+<canvas id="canvas">你的浏览器不支持canvas,请更新浏览器</canvas>
+<script>
+var canvasWidth=800;
+var canvasHeight=canvasWidth;
+var flag=false;
+var canvas=document.getElementById('canvas');
+var context=canvas.getContext('2d');
+canvas.width=canvasWidth;
+canvas.height=canvasHeight;
+draw();
+function draw(){
+	context.save();
+	context.strokeStyle="#0000ff";
+	context.beginPath();
+	context.moveTo(0,0);
+	context.lineTo(canvasWidth,0);
+	context.lineTo(canvasWidth,canvasHeight);
+    context.lineTo( 0,canvasHeight);
+	context.closePath();
+	context.lineWidth=10;
+	context.stroke();
+	context.restore();
+	}
+	   canvas.onmousedown=function(ev){
+		   if(window.event){
+			    e=window.event;
+				e.returnValue=false;
+			   }
+			   else{
+				    e.preventDefault();
+				   }
+		  flag=true;
+		}
+		canvas.onmouseup=function(ev){
+		 flag=false;
+		}
+		canvas.onmouseout=function(ev){
+		 flag=false;
+		}
+		canvas.onmousemove=function(ev){
+		 if(flag){
+			  context.beginPath();
+			  context.moveTo();
+			  context.lineTo();
+			  context.strokeStyle="rgb(148,105,31)";
+			  context.lineWidth=10;
+			  context.closePath();
+			  context.stroke();
+			 }
+		}
+		  
+</script>
+</body>
+</html>

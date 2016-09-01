@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+var arr=new Array()
+var d=new Date();
+var o=new Object();
+var b=[];
+var c={name:'zy',age:20};
+document.write(typeof(arr)+' '+typeof(d)+' '+typeof(d)+' '+typeof(o)+' '+typeof(b)+' '+typeof(c));
+</script>
+<script>
+var person={name:'zy',age:20};
+person.sex="male";
+function showInfoInObject(person){
+	person.sex='male';
+	showInfoInObject(person);
+     document.write("信息为：");
+	 showInfoInObject(this);
+	 	
+	}
+	showInfoInObject(person);
+	person.showInfo=function(){
+		document.write('当前对象信息为:');
+		showInfoInObject(this);
+		}
+		showInfoInObject(person);
+		function showInfoInObject(obj)
+		{
+			for(var key in obj)
+			{
+				document.write(key+":"+obj[key]+'<br>');
+				}
+				document.write("<hr>");
+			}
+		
+</script>
+<script>
+function show1()
+{
+	alert('a')
+	}
+	function show2()
+	{
+		alert('b');
+		
+	}
+	window['show1']();
+	window['show2']();
+	//内容比较
+Object.prototype.equals=function(obj)
+{
+	var result=false;
+	for( var key in obj)
+	{if(!obj[key]&&!this[key]&&obj[key]!=this[key])
+	{
+	   return reslut;
+	}
+	  for(var key in this)
+	  {
+		  if(!obj[key]||!this[key]||obj[key]!=this[key])
+		  {
+			  return result;
+			  }
+		  }
+		}
+		return true;
+	}
+ 
+	var a={name:'yc',age:20};
+	var b={name:'smith',age:10}
+   document.write((a==b)+'<br>');
+    document.write(a.equals(b));
+	Object.prototype.clone=function()
+	{
+		var nevobj=[];
+		for(var key in this)
+		{
+			nevobj[key]=this[key];
+			}
+		return navobj;
+		}
+		var newA=a.clone();
+		document.write(clone());
+</script>
+<title>无标题文档</title>
+</head>
+
+<body>
+</body>
+</html>

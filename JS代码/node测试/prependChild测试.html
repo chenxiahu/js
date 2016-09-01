@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="yclib.js"></script>
+</head>
+
+<body>
+<div id="con">
+<p id="a">a
+<span>abc</span>
+<span>efd</span>
+</p>
+<p id="b">b</p>
+<p id="c">ccc</p>
+</div>
+<script>
+var newnode=document.createElement('p');
+var txtnode=document.createTextNode('hello');
+newnode.appendChild(txtnode);
+yc.prependChild('con',newnode);
+yc.removeChildren('a');
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+ function createXHR(){
+	 //ie7+,ff,chrome,safari等
+	  if(typeof XMLHttpRequest!='undefined'){
+		  return new XMLHttpRequest();
+		  }
+		  else if(typeof ActiveObject!='undefined'){
+			  //ie早期版本 查看调用函数中是否存在一个activeXString的变量
+			  if(typeof arguments.callee.activeXString!='String'){
+				  var versions=['MSXML2.XMLHttp.6.0','MSXML2.XMLLHttp.3.0','MSXML2.XMLHttp'];
+				  for(var i=0,len=versions.length;i<len;i++){
+					  try{
+						  var xhr=new ActiveObject(versions[i]);
+						  arguments.callee.activeXString=versions[i];
+						  return xhr;
+						  }
+						  catch(e){
+							    //skip
+							  }
+					  }
+			  }
+				  return new ActiveXObject(arguments.callee.activeXString);
+				  }
+				  else{
+					   throw new Error('No XHR object available');
+					  }
+			   
+	 }
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="mydiv"></div>
+<script>
+/*var datatemplate=function(template,data){
+	 for(var i in data){
+		  
+		 template=template.replace('{'+i+'}',data[i]);
+		 }
+		return template;
+	
+	}
+	*/
+ var template='<table border="{border}">'+
+'<tr><th>Last</th><td>{last}</td></tr>'+
+'<tr><th>First</th><td>{first}</td></tr>'+'</table>';
+document.write(template);
+
+function supplant(str,o){
+	 return str.replace(/{([a-z]*)}/g,function(a,b){
+		 alert(b);
+		 var r=o[b];
+		 return r;
+		 });
+	}
+var data={
+	"first":"Carl",
+	"last":"hellywood",
+	"border":10
+	};
+  document.getElementById('mydiv').innerHTML=supplant(template,data);
+ </script>
+</body>
+</html>

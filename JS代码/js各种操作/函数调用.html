@@ -1,0 +1,154 @@
+<!DOCTYPE html >
+<head>
+<meta  charset="utf-8" />
+<title>js</title>
+<script>
+//外部调用
+function inner(x)
+{
+	return function(){
+		return 2*x;
+		}
+	}
+	function f()
+	{
+		var a=[];
+		for(var i=0;i<3;i++)
+		{
+			a[i]=inner(i);
+			}
+			return a;
+		}
+		var result=f();
+		document.write(result[0]()+'<br>'+result[1]()+'<br>'+result[2]());
+		//内部调用
+		function f()
+		{
+			function inner(x){
+				return function()
+				{
+					return 2*x;
+					}
+				}
+				var a=[];
+				for(var i=0;i<3;i++)
+				{
+					a[i]=inner(i);
+				}
+					return a;
+			}
+			 
+			 	
+ 
+var arr=['apple','pear','banana'];
+var innerArray=new Array();
+for(var i=0;i<arr.length;i++)
+{
+	var item=arr[i];
+	innerArray[i]=function()
+	{
+		document.write(item+'<br>');
+		}
+	}
+	for(var i=0;i<innerArray.length;i++)
+	{
+		innerArray[i]();
+		}
+	
+	
+ </script>
+ <script type="text/javascript">
+ var setAge,getAge;
+ (
+	 function(){
+		 var age=0;
+		 setAge=function(a)
+		 {
+			 age=a;
+			 };
+			 getAge=function()
+			 {
+				 return age;
+				 };
+				  
+				 
+		 
+		 document.write(getAge());
+		setAge(20);
+		document.write(getAge());
+	 }
+	 )();
+	
+ </script>
+<script>
+//b闭包
+var ycarray=(function(){
+	var array=[];
+	
+}
+)();
+ycarray.add('a');
+ycarray.add('b');
+document.write(ycarray.size());
+ycarray.clear();
+document.write(ycarray.size());
+var result=ycarray.get();
+for(var i=0;i<result.length;i++)
+{
+	document.write(result[i]+'<br>');
+	}
+	
+	var person=(function()
+	{
+		var name='';
+		var age=18;
+		return {
+			setName:function(n){
+				name=n;
+				}
+			},
+			setAge:function(a){
+				if(a<18)
+				{
+					alert("年龄无效，必须在18上");
+					}
+					else{
+				age=a;	
+				}
+				},
+				getName:function(){
+					return name;
+					},
+					setAge:function(){
+					return age;
+					},
+					toString:function(){
+					return "姓名："+name+"年龄："+age;
+			}
+				
+		}
+		 
+		
+		)();
+</script>
+<script>
+function selfNext(arr){
+	var index=0;
+	return function(){
+		return arr[index++];
+		}
+	}
+	var mynext=selfNext([1,2,3,4]);
+	document.write(mynext());
+	document.write(mynext());
+	document.write(mynext());
+	while(a=mynext())
+	{
+		document.write(a+'<br/>');
+		}
+</script>
+</head>
+
+<body>
+</body>
+</html>

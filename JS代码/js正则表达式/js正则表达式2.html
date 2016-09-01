@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Js正则表达式2</title>
+<style>
+textarea{width:200px;height:100px}
+
+</style>
+<script>
+function filter(){
+var str=document.getElementById('first').value;
+var reg=/他妈|人妖|你他妈/g;
+document.getElementById('second').value=str.replace(reg,function(ss){
+	alert(ss);
+	})
+};
+</script>
+</head>
+
+<body>
+<textarea id="first"></textarea>
+<input type="button" value="过滤" onClick="filter()"><bt>
+<textarea id="second"></textarea>
+</body>
+</html>

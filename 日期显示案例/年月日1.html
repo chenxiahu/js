@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<select id="year" onChange="setDay(this,month,day)">
+<option>年</option>
+</select>
+<select id="month" onChange="setDay(year,this,day)">
+<option>月</option>
+</select>
+<select id="day">
+<option>日</option>
+</select>
+<script type="text/javascript">
+var myyear=document.getElementById('year');
+var mymonth=document.getElementById('month');
+var myday=document.getElementById('day');
+window.onload=function(){
+ for(var i=new Date().getFullYear();i>1992;i--){
+	  addOption(myyear,i,i);
+	}
+ for(var i=1;i<13;i++){
+	 addOption(mymonth,i,i);
+	 }
+	for(var i=1;i<31;i++){
+		addOption(myday,i,i);
+		}
+}
+function setDay(year,month,day){
+	var monthdays=[31,28,31,30,31,30,31,31,30,31,30,31];
+	var y=year.options[year.selectedIndex].text;
+	var m=month.options[month.selectedIndex].text;
+	var dayNum=monthdays[m-1];
+	if(m==2&&isleap(y)){
+		dayNum++;
+		}
+	 for(var i=day.options.length-1;i>=dayNum;i--){
+		 day.remove(i);
+		 }
+	  for(var i=day.options.length;i<=dayNum;i++){
+		  addOption(day,i,i);
+		  } 
+	}
+function isleap(year){
+	 return ((year%400==0)||(year%100!=0&&year%4==0));
+	}
+function addOption(obj,value,text){
+	option=document.createElement('option');
+	option.text=text;
+	option.value=value;
+	obj.options.add(option);
+	}
+ 
+ 
+</script>
+</body>
+</html>

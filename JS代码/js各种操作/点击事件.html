@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+
+<body>
+<input type="button" value="点我" onclick="aa()" onDblClick="bb()"/>
+<input type="button" value="双击点我">
+<script>
+/*function show()
+{
+	 alert('叫你点我就点我，真乖');
+	}
+ var btn=document.getElementsByTagName('input')[1];
+ btn.addEventListener("dblclick",function(){
+	 alert('双击了我');
+	 });
+	 btn.addEventListener("click",function(){
+		 alert('单击点我')
+		 },false);
+		 
+*/	 
+var isdb;
+function aa(){
+	isdb=false;
+	/*//window.setTimeout(cc,500);
+	function cc(){
+	if(isdb!=false){
+		return;
+		}*/
+		alert('这是单击');
+	 
+		 
+	}
+	function bb(){
+		 isdb=true;
+		 alert('这是双击');
+		}
+</script>
+</body>
+</html>

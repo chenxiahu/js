@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8" />
+<script>
+function addHandler(nodes)
+{
+	function invoke(i){
+		return function(){
+			alert(i+1);
+			}
+		}
+		for(var i=0;i<nodes.lenght;i++)
+		{
+			var node=nodes[i];
+			node.onclick=invoke(i);
+			}
+	}
+	var ycarray=( function(){
+		   var array=[];
+		   return{
+			   add:function(item){
+				   array[array.length]=item;
+				   },
+				   size:function(){
+					   return array.length;
+					   },
+					   clear:function()
+					   {
+						   array=[];
+						   },
+						   get:function(){
+							   return array;
+							   }
+			   };
+		})();
+		ycarray.add('a');
+		ycarray.add('b');
+		document.write(ycarray.size()+'<br>');
+		ycarray.clear();
+		document.write(ycarray.size()+'<br>');
+</script>
+<title>匿名函数没有被调用，三种解决方法</title>
+</head>
+
+<body>
+</body>
+</html>

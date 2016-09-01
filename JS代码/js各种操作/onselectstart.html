@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+onselect:代表文本被选中
+<div id="text">这里是测试文字</div>
+<input type="text" value="这里是测试文字，你选中试试" id="inp"/>
+<textarea id="txt">这里是测试文字，你选中试试</textarea>
+<script>
+var div=document.getElementById('text');
+var inp=document.getElementById('inp');
+var txt=document.getElementById('txt');
+div.onselect=function(){
+	 alert('叫你选中就选中');
+	}
+	div.onselectstart=function(){
+		 return false;
+		}
+</script>
+</body>
+</html>

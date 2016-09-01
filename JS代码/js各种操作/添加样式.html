@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function addSheet(cssURL){
+	if(document.createStyleSheet){
+		document.createStyleSheet(cssURL);
+		}else{
+			var ss=document.createElement('link');
+			ss.type='text/css';
+			ss.rel='stylesheet';
+			ss.href=cssURL;
+			document.getElementsByTagName('head')[0].appendChild(ss);
+			}
+	}
+	addSheet('a.css');
+</script>
+<p class="myclass1">abc</p>
+</body>
+</html>

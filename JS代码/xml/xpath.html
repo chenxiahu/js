@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+ 
+<script>
+function parseXML(str){
+//创建DOM解析器
+var xmlDoc;
+try{
+	 //ie
+	 xmlDoc=new ActiveXobject('Microsoft.XMLDOM');
+	 xmlDoc.async=false;//将加载方式设为同步方式
+	 xmlDoc.loadXML(str)
+	}catch(e){
+		try{
+			//Firefox,Mozilla,Opera,webkit.
+			var parser=new DOMParser();
+			var xmlDoc=parser.parseFromString(str,'text/xml');
+			
+			}
+			catch(x){
+				 
+				return;
+				}
+		}
+		 
+return xmlDoc;
+}
+
+   function selectXMLNodes(xmlDoc,xpath){
+	   if('\v'=='v'){
+		   xmlDoc.setProperty("SelectingLanguage","XPath");//将当前xml文档的查找方式转换为xpath
+		   return xmlDoc.documentElement.selectNodes(xpath);
+		   }
+		   else{
+			   //w3c
+			   var evaluator=new XPathEvaluator();
+			   var resultSet=evaluator.evaluate(xpath,xmlDoc,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE,null);
+			   var finalArray=[];
+			   if(resultSet){
+				   var el=resultSet.iterateNext();
+				   while(el){
+					   finalArray.push(el);
+					   el=resultSet.iterateNext();
+					   }
+					  return finalArray;
+				   }
+			   }
+	   }
+	   
+         var xmlStr="<customers><customer id='1'><name>李一</name><birthdata>March 10,1980</birthdata><email>aa@qq.com</email><phone>12442344</phone></customer><customer><name>李四</name><birthdata>March 10,1980</birthdata><email>aa@qq.com</email><phone>12442344</phone></customer></customers>";
+//将字符串xmlDOM变成 Xml document对象  序列化
+         var xmlDOM=parseXML(xmlStr);
+         var nodeList=selectXMLNodes(xmlDOM,'/customers/customer[@id=\"1\"]');
+	     alert(nodeList[0].innerHTML);
+		 if(xmlDOM.xml){
+		   document.write(nodeList[0].xml);
+		   }
+		    
+</script>
+<div id="result"></div>
+</body>
+</html>

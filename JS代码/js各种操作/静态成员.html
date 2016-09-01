@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+<head>
+<meta  charset="utf-8" />
+<title>静态成员</title>
+<script>
+Object.sayHai=function(){
+	alert('a');
+	}
+	Object.sayHai();
+	Object.prototype.sayBye=function()
+	{
+		alert('baibai');
+		};
+	var obj=new Object();
+	obj.sayBye();
+	
+	function Person(name,age){
+		this.name=name;
+		this.age=age;
+		}
+		var zs=new Person("张三",20);
+		document.write(zs.name+' '+zs.age+'<br>');
+	//new Person 构造函数；
+	//var zs= Person();
+	//document.write(zs);
+	document.write(zs.constructor+'<br>');
+	var p=new zs.constructor('李四',30);
+	document.write(p.name+'  '+p.age+'<br>');
+	document.write((p.constructor==Person)+'<br>');
+	document.write((p.constructor==Object)+'<br>');
+</script>
+</head>
+
+<body>
+
+</body>
+</html>

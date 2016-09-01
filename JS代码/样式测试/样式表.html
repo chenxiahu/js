@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="a.css">
+<style>
+.myClas2{color:red;}
+</style>
+</head>
+
+<body>
+<p class="myClas2">hello</p>
+<script>
+//取得所有的样式表：document.styleSheets只能取得<link><style>所标识的样式表
+//getSheets()能取得所有的样式表（包括Import）
+function getSheets(){
+	 var styleCollection=[];//样式表集合
+	 var indexedStyleSheets=0;
+	 //先加<link><style>所标识的样式表
+	 for(var i=0;i<document.styleSheets.length;i++){
+		 styleCollection[styleCollection.length]=document.styleSheets[i];
+		 }
+	 while(indexedStyleSheets<styleCollection.length){
+		  for(var i=indexedStyleSheets;i<styleCollection.length;i++){
+			  indexedStyleSheets+=1;
+			  if(styleCollection[i].cssRules){
+				  for(var x=0;x<styleCollection[i].cssRules.length;x++){
+					  if(styleCollection[i].cssRules[x].type==3){
+						  styleCollection[styleCollection.length]=styleCollection[i].cssRules[x].styleSheet;
+						  }
+					  }
+					  
+				  }
+				  else{
+					   for(var x=0;x<styleCollection[i].imports.length;x++){
+						   styleCollection[styleCollection.length]=styleCollection[i].imports[x];
+						   }
+					  }
+			  }
+		 }
+		 return styleCollection;
+	}
+  function show(){
+	    var stylesheetlist=getSheets();
+		var resultContext="";
+		for(var i=0;i<stylesheetlist.length;i++){
+			resultContext+='<p>stylesheet href地址：'+stylesheetlist[i].href+'<p>';
+			}
+			document.body.innerHTML=resultContext;
+	  }
+	  show();
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="yclib.js">
+</script>
+
+</head>
+
+<body onLoad="init()">
+<script>
+function init(){
+	var newstyle={"color":"red","background":"blue"};
+	yc.setStylesByTagName("div",newstyle);
+	var newstyle1={"color":"blue","background-color":"red"};
+	yc.setStylesByTagName("span",newstyle1,'c');
+	}
+</script>
+<div id="a">hello
+<div id="b">bye</div>
+</div>
+<p id="c">hello
+<span id="d">bye</span>
+</p>
+<span id="e">bye222222</span>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html >
+<head>
+<meta charset="utf-8" />
+<title>H5</title>
+</head>
+<script type="application/javascript">
+function mult()
+{
+	a-parseInt(prompt("请输入第一个数字",0));
+	b-parseInt(prompt("请输入第二个数字",0));
+	document.forms["form"]["result"].value=a*b;
+	}
+</script>
+<body onLoad="mult()">
+<form>
+用户名：<input type="text" name="username" autocomplete="off"/><br>
+密码： <input type="password" name="password" autocomplete="off"/><br>
+<input type="submit" name="button" value="登录"/>
+</form>
+<form>
+<p><label for="textarea1" >请仔细阅读许可协议：</label></p>
+<p>
+<textarea name="textarea1" id="textarea1" cols="20" rows="5">请仔细阅读许可协</textarea>
+</p>
+<p>
+<input type="submit" name="submit" value="同意" autofocus="on" />
+<input type="submit" name="submit" value="拒绝"/>
+</p>
+</form>
+<form>
+请输入网址：<input type="url" list="url_list"/>
+<datalist id="data_list">
+<option  label="新浪" value="xinlang.com" >
+ <option  label="百度" value="baidu.com" >
+ <option  label="搜狐" value="souhu.com" >
+</datalist>
+<input type="submit" value="提交"/>
+</form>
+<form>
+请输入数值：<input type="number" name="number1" min="0" max="12" step="4"/>
+<input type="submit" value="提交"/>
+</form>
+<form>
+请输入选择的图片：<input type="file" name="img" multiple/>
+<input type="submit" value="提交"/>
+</form>
+<form action="#" method="get">
+请输入国家代码：<input type="text" name="text" pattern="[A-za-z](3)" title="3个国家字母" />
+<input type="submit" value="提交" />
+</form>
+<form action="#" enctype="application/x-www-form-urlencoded" method="get" id="test"/>
+请输入一个email地址<input type="email" name="email"><br>
+<input type="submit" value="formaction" formaction="2.html"/>
+<input type="submit" value="formenctype" formenctype="multipart/form-data"/>
+<input type="submit" value="formenctype" formmethod="post"/>
+<input type="submit" value="formnovalidate" formnovalidate="formnovalidate"/>
+<input type="submit" value="formtarget" formtarget="_self"/>
+</form>
+<form action="#" method="get" name="form">
+两数乘积： <output name="result"></output>
+ 
+</form>
+</body>
+</html>

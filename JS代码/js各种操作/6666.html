@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<a href="fish.html">fish.html</a>
+<a href="tree.html">tree.html</a>
+ <input type="text" name="num" id="num"/>
+ <div id="demo1" onClick="javascript:history.forward()">前进</div>
+ <div id="demo2" onClick="javascript:history.back()">后退</div>
+ <div id="demo3" onClick="javascript:gowhere()">go</div>
+ <script>
+ function gowhere(){
+	 var num=document.getElementById('num').value;
+	 history.go(num);
+	 }
+ </script>
+</body>
+</html>

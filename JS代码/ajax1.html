@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>hello get()方法</title>
+ 
+</head>
+
+<body>
+<form action="" method="post">
+    用户名：<input type="text" name="name" id="name" /></br>
+    密码：<input type="password" name="password" id="password"/><br>
+    <input type="button" value="登录" id="btn" onClick="login()"  />
+</form>
+<script type="text/javascript">
+function createXHR(){
+	 //ie7+,ff,chrome,safari等
+	  if(typeof XMLHttpRequest!='undefined'){
+		  return new XMLHttpRequest();
+		  }
+		  else if(typeof ActiveObject!='undefined'){
+			  //ie早期版本 查看调用函数中是否存在一个activeXString的变量
+			  if(typeof arguments.callee.activeXString!='String'){
+				  var versions=['MSXML2.XMLHttp.6.0','MSXML2.XMLLHttp.3.0','MSXML2.XMLHttp'];
+				  for(var i=0,len=versions.length;i<len;i++){
+					  try{
+						  var xhr=new ActiveObject(versions[i]);
+						  arguments.callee.activeXString=versions[i];
+						  return xhr;
+						  }
+						  catch(e){
+							    //skip
+							  }
+					  }
+			  }
+				  return new ActiveXObject(arguments.callee.activeXString);
+				  }
+				  else{
+					   throw new Error('No XHR object available');
+					  }
+			   
+	 }
+	 var request;
+	 function login(){
+	 if(request){
+		 request=createXHR();
+		 var name=document.getElementById('name').value;
+		 var password=document.getElementById('password').value;
+		 request.onreadystatechange=listener;
+		 request.open("POST","http://192.168.1.238:8080/test/login.action",true); 
+		 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		 request.send("name="+name+"&password="+password);
+		 }
+	 }
+	function listener(){
+		/*switch(request.readyState){
+			case 1:
+			console.log("载入服务器页面中...");
+			break;
+			case 2:
+			console.log("载入完成...");
+			break;
+			case 3:
+			console.log("交互....");
+			break;
+			case 4:
+			console.log("服务器正常响应完成...");*/
+			if(request.readyState==4&&request.status==200){
+				//console.log("服务器正常响应...");
+				document.write(request.responseText);
+			}
+ 
+		}
+</script>
+</body>
+</html>

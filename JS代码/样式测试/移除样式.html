@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="a.css"/>
+<style >
+.myclass2{
+	 color:red;
+	}
+</style>
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function removeSheet(index){
+	var sheet=document.styleSheets[index];
+	var container=sheet.owingElement||sheet.ownerNode;
+	if(container){
+		container.parentNode.removeChild(container);
+		}
+	}
+	removeSheet(1);
+</script>
+<p class="myclass1 myclass2">hello</p>
+</body>
+</html>

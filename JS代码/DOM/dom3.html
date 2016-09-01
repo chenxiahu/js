@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0px;
+height:0;}
+.nav{width:1400px;height:60px}
+ul li{
+	list-style:none;
+	width:278px;
+	line-height:38px;
+	text-align:center;
+	float:left;
+	border:1px solid #ccc;
+	margin-top:20px;
+	font-size:20px;
+	}
+	#d1{width:1399px;
+	height:700px;
+	background:url(file:///E|/%E6%BA%90%E7%A8%8B24/DOM/%E4%BD%9C%E4%B8%9A%E5%9B%BE%E7%89%87/1.jpg)no-repeat;
+	background-size:cover;
+	}
+	#d2{width:1399px;
+	height:700px;
+	background:url(file:///E|/%E6%BA%90%E7%A8%8B24/DOM/%E4%BD%9C%E4%B8%9A%E5%9B%BE%E7%89%87/2.jpg)no-repeat ;
+	 background-size:cover;
+	display:none;
+	}
+	#d3{
+	width:1399px;
+	height:700px;
+	background:url(file:///E|/%E6%BA%90%E7%A8%8B24/DOM/%E4%BD%9C%E4%B8%9A%E5%9B%BE%E7%89%87/3.jpg)no-repeat;     
+	background-size:cover;
+	display:none;
+	}
+	#d4{
+	width:1399px;
+	height:700px;
+	background: url(file:///E|/%E6%BA%90%E7%A8%8B24/DOM/%E4%BD%9C%E4%B8%9A%E5%9B%BE%E7%89%87/4.jpg)no-repeat;    
+	background-size:cover;
+	display:none;
+	}
+	#d5{
+	width:1399px;
+	height:700px;
+	background: url(file:///E|/%E6%BA%90%E7%A8%8B24/DOM/%E4%BD%9C%E4%B8%9A%E5%9B%BE%E7%89%87/5.jpg)no-repeat;
+	background-size:cover;
+	display:none;
+	}
+	
+</style>
+</head>
+
+<body>
+<div class="nav">
+<ul>
+<li onClick="show('d1')">疯狂的动物城-狮子</li>
+<li onClick="show('d2')">疯狂的动物城-树懒</li>
+<li onClick="show('d3')">疯狂的动物城-兔子</li>
+<li onClick="show('d4')">疯狂的动物城-狐狸</li>
+<li onClick="show('d5')">疯狂的动物城-仓鼠</li>
+</ul>
+</div>
+<div id="d1"></div>
+<div id="d2"></div>
+<div id="d3"></div>
+<div id="d4"></div>
+<div id="d5"></div>
+ <script>
+ function getStyle(obj,attr){
+	 if(obj.currentStyle){
+		 return obj.currentStyle[attr];
+		 }
+		 else{
+			 return getComputedStyle(obj,false)[sttr];
+			 }
+	 }
+	 function show(i){
+		 for(var n=1;n<=5;n++){
+			 if(('d'+n)==i){
+				  document.getElementById(i).style.display='block';
+				 }
+			  else{
+				  document.getElementById('d'+n).style.display='none';
+				  }
+			 }
+		 }
+ </script>
+</body>
+</html>

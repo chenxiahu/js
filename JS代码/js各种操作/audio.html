@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{
+	margin:0px auto;
+	padding:0px;
+	}
+	body{
+		 width:800px;
+		 }
+		 audio{
+			  display:block;
+			  margin-top:20px;
+			 }
+			 input{
+				   padding:5px 20px;
+			       border-radius:5px;
+				   margin-top:10px;
+				 }
+</style>
+</head>
+
+<body>
+ <audio src="file:///F|/KuGou/S.I.N.G女团 - 飞过时间的海.mp3" id="audio" controls></audio><br>
+ <input type="button" value="播放" onClick="playOrPause(this)"/>
+ <input type="button" value="隐藏控制框" onClick="hideOrShowControls(this)"/>
+ <input type="button" value="开始静音" onClick="muted(this)"/>
+ <input type="button" value="获取播放时间" onClick="getCurredntTime()"/>
+ <input type="button" value="音量+" onClick="vol('up')"/>
+ <input type="button" value="音量-" onClick="vol('down')"/>
+ 当前音量：<span id="nowVol"></span>
+<script>
+var audio;
+window.onload=function(){
+	 audio=document.getElementById('audio');
+	 document.getElementById('nowVol').innerHTML=audio.volume*100;
+	}
+	function playOrPause(obj){
+		if(audio.paused){
+			 audio.play();
+			 obj.value="暂停";
+			}
+			else{
+				 audio.paused();
+				 obj.value="播放";
+				}
+		}
+		function hideOrShowControls(obj){
+			 if(audio.controls)
+			 {
+				  audio.removeAttribute("controls");
+				  obj.value="显示控制框";
+				 }
+				 else{
+					   audio.controls="controls";
+					   obj.value="隐藏控制框";
+					 }
+				 
+			}
+			function muted(obj){
+				  if(audio.muted)
+				  {
+					   audio.muted=false;
+					   obj.value="开启静音";
+					  }
+					  else{
+						   audio.muted=true;
+						   obj.value="关闭静音";
+					  }
+				}
+				function getCurredntTime(){
+					 alert(audio.currentTime+':秒');
+					}
+					function vol(type){
+						if(type=='up'){
+							var volume=audio.volume+0.1;
+							if(volume>=1){
+								volume=1;
+								}
+								audio.volume=volume;
+							}
+							else if(type=='down'){
+								  var volume=audio.volume-0.1;
+								  if(volume<=0)
+								  {
+									  volume=0;
+									  }
+									  document.getElementById('nowVol').innerHTML=parseInt(audio.volume*100);
+								}
+						}
+						
+						document.onkeydown=function(event){
+							  var e=event?event:window.event;
+							  var keycode=e.keyCode;
+							  if(keycode==32){
+								   playOrPause(document.getElementsByClassName('input')[0]);
+								  }
+								  if(e.shiftkey&&keycode==83){
+									  hideOrShowControls(document.getElementsByClassName('input')[1]);
+								
+								}
+							 if(e.ctrlkey&&keycode==39){
+						                audio.currentTime=audio.currentTime+5;
+									  }
+							}
+							window.setInterval(function(){
+								if(audio.onended){
+									alert('已经播放完毕');
+									}},1000);
+</script>
+</body>
+</html>

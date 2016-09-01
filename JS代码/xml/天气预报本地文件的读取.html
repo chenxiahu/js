@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>XML Parsing Example</title>
+<script src="yclib.js"></script>
+</head>
+<style>
+.head{
+	background:#039;
+	width:600px;
+	height:50px;
+	}
+
+#span{
+	margin-left:30px;
+	color:#FFF;
+	text-align:center;
+	line-height:30px;
+	}
+#content{
+	position:absolute;
+	background:#06F;
+	height:400px;
+	width:600px;
+	margin-left:50px;
+	color:#FFF;
+	 
+	}
+ ul li{
+	 list-style:none;
+	 width:110px;
+	 height:180px;
+	 float:left;
+	 border-right:1px #FFF solid; 
+	 text-align:center;
+	 opacity:1;
+	 }
+#cont1{
+	margin-top:220px;
+	}
+ 
+ </style>
+<body >
+<h1 align="center">天气预报本地文件的读取和显示</h1>
+<div id="content">
+   <div id="head" class="head"> 
+   <span id="span"></span>
+   </div>
+    
+   <div id="buttom">
+    <p id="time"></p>
+    <ul>
+       <li ><img src="weather/a_0.gif"/>
+       </br><div id="1"></div></li>
+       <li><img src="weather/a_0.gif"/>
+       <div id="2"></div></li>
+       <li><img src="weather/a_0.gif"/>
+        <div id="3"></div>
+       </li>
+       <li><img src="weather/a_0.gif"/>
+        <div id="4"></div>
+       </li>
+       <li style="border-right:0px"><img src="weather/a_1.gif">
+       <div id="5"></div></li>
+    </ul>
+    <div id="cont1" style="margin-left:40px;"></div>
+   </div>
+
+</div>
+<script>
+  function loadXML(file){
+	  try{
+		  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+		  xmlDoc.async=false;
+		  xmlDoc.load(file);
+		  }
+		  catch(e){
+			   try{
+				   xmlDoc=document.implementation.createDocument("","",null);
+				   xmlDoc.async=false;
+				   xmlDoc.load(file);
+				   }
+				   catch(e){
+					   try{
+					   var xmlhttp=new window.XMLHttpRequest();
+					   xmlhttp.open("GET",file,false);
+					   xmlhttp.send(null);
+					   xmlDoc=xmlhttp.responseXML.documentElement;
+					   }
+					   catch(e){
+						   alert("您的浏览器不能正常加载文件，请切换到兼容模式，或者更换浏览器");
+						   }
+				   }
+					   
+			  }
+			 return xmlDoc;
+	  
+	  }
+	  
+	  var xmlDOM=loadXML("heyang.xml");
+	  yc.$('span').innerHTML=xmlDOM.getElementsByTagName('string')[0].childNodes[0].nodeValue;
+	  yc.$('time').innerHTML=xmlDOM.getElementsByTagName('string')[3].childNodes[0].nodeValue;
+	  function weather(start,last){
+		    var weathers=xmlDOM.getElementsByTagName('string');
+		    var str=[];
+			var element;
+	        for(var i=start;i<last;i++){
+		    element=weathers[i].childNodes[0].nodeValue;
+		    str.push(element);
+		  }
+		  return str;
+	   }
+	 yc.$('1').innerHTML=weather(7,10).valueOf();
+	 yc.$('2').innerHTML=weather(12,15).valueOf();
+	 yc.$('3').innerHTML=weather(17,20).valueOf();
+	 yc.$('4').innerHTML=weather(22,25).valueOf();
+	 yc.$('5').innerHTML=weather(27,29).valueOf();
+	 yc.$('cont1').innerHTML=weather(4,6).valueOf();
+	   
+	function changeColor(){
+		 var oLi=document.getElementsByTagName('li');
+		 for(var i=0;i<oLi.length;i++){
+			  oLi[i].onmouseover=function(){
+				  this.style.opacity=0.7;
+				  this.style.background='red';
+				  }
+			 }
+		}  
+  function deleteColor(){
+	   var oLi=document.getElementsByTagName('li');
+		 for(var i=0;i<oLi.length;i++){
+			  oLi[i].onmouseout=function(){
+				  this.style.opacity=1;
+				  this.style.background='';
+				  }
+			 }
+	  }
+changeColor();
+deleteColor();
+  </script>  
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script type="text/javascript">
+window.onload=function(){
+	 showInfo();
+	};
+	var deIobj;
+	function setColor(){
+		 var tbodyTrs=document.getElementsByTagName('tbody')[0].getElementsByTagName('tr'); 
+		 for(var i=0;i<tbodyTrs.length;i++){
+			  tbodyTrs[i].style.cssText="background-color:none";
+			  if(i%2==0){
+				   tbodyTrs[i].style.cssText="background-color:#39f";
+				  }
+			 }
+			 for(var i=0;i<tbodyTrs.length;i++){
+				  tbodyTrs[i].index=i;
+				  tbody[i].addEventListener("mouseover",function(){
+					   this.style.cssText='background:#6ff';
+					   
+					  });
+					   tbody[i].addEventListener("mouseout",function(){
+						   if(i%2==0){
+							    this.style.cssText='background:#39f';
+							   }
+							   else{
+					               this.style.cssText='background:#fff';
+							   }
+					  });
+					  
+				 }
+		}
+		function showInfo(){
+			 setColor();
+			 var tds=document.getElementsByTagName('td');
+			 console.log(arguments.length);
+			 if(arguments.length==1){
+				  tds[tds.length-1].addEventListener("click",tdclick);
+				  tds[tds.length-2].addEventListener("click",tdclick);
+				 }
+				 else{
+					  for(var i=0;i<tds.length;i++){
+						   tds[i].removeEventListener("click",tdclick);
+				           tds[i].addEventListener("click",tdclick);
+						  }
+					 }
+			}
+			function tdclick(){
+				 delObj=this.parentNode;
+				 var inputObj=document.createElement('input');
+				 inputObj.type='text';
+				 inputObj.style.ceeText="border:0px;font-size:12px";
+				 var tdObj=this;
+				 inputObj.value=tdObj.innerHTML;
+				 var text=tdObj.innerHTML;
+				 tdObj.innerHTML="";
+				 tdObj.appendChild(inputObj);
+				 inputObj.select();
+				 tdObj.removeEventListener("click",tdclick);
+				 inputObj.onkeyup=function(event){
+					 var e=ev||event;
+					 var keycode=e.keyCode;
+					 }
+					 if(keycode==13){
+						  var inputval=this.value;
+						  tdObj.innerHTML=text;
+						 }
+						 else if(keycode==27){
+							  tdObj.innerHTML=text;
+							 }
+							 tdObj.removeEventListener("click",tdclick);
+							 tdObj.addEventListener("click",tdclick);
+						 
+				}
+				function delInfo(){
+					 var result=confirm('你确定要删除这个数据');
+					 if(result){
+						  if(window.ActiveXObject){
+							   delObj.parentNode.removeChild(delObj);
+							  }
+							  else{
+								   delObj.remove();
+								  }
+								  setColor();
+						 }
+					}
+					function addInfo(){
+						 var tbody=document.getElementsByTagName('tbody')[0];
+						 var trInfo=document.createElement('tr');
+						  var tdInfo=document.createElement('tr');
+						  tdInfo.innerHTML="143514356";
+						  trInfo.appendChild(tdInfo);
+						  var tdInfo2=document.createElement('td');
+						  tdInfo.innerHTML="王九";
+						  trInfo.appendChild(tdInfo2);
+						  tbody.appendChild(trInfo);
+						  showInfo(1);
+						}
+</script>
+<table id="tab1" width="400px" height="100px" >
+   
+   <td>姓名</td>
+   <td>年龄</td>
+ 
+   <tbody>
+   <tr>
+ 
+   <td>blue</td>
+   <td>27</td>
+   </tr>
+   <tr>
+   
+   <td>张三</td>
+   <td>23</td>
+   </tr>
+   <tr>
+ 
+   <td>李四</td>
+   <td>28</td>
+   </tr>
+   <tr>
+ 
+   <td>王五</td>
+   <td>25</td>
+   </tr>
+   <tr>
+    
+   <td>张伟</td>
+   <td>24</td>
+   </tr>
+   </tbody>
+</table>
+<input type="button" onClick="tdclick()" value="添加一行">
+<input type="button" onClick="delInfo()" value="删除一行">
+</body>
+</html>

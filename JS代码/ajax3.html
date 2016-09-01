@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>xml添加和查询学生</title>
+<script src="yclib.js"></script>
+</head>
+
+<body>
+<form name="myform">
+  <input type="hidden" name="op" value="add" >
+<p> 学生名：<input type="text" name="sname" value="张三"></p>
+<p>学生年龄：<input type="text" name="age" value="20"></p>
+<p><input type="button" onClick="add()" value="添加"/></p>
+</form>
+<p id="result"></p>
+<span id="showall">显示所有学生信息</span>
+<hr>
+<table border="1" width="700px">
+   <thead>
+     <tr> 
+       <td>编号</td>
+       <td>姓名</td>
+       <td>年龄</td>
+     </tr>
+   </thead>
+   <tbody id="students">
+     
+   </tbody>
+</table>
+<script type="text/javascript">
+function add(){
+	   var params=yc.serialize(document.myform);
+	   console.log(params);
+	   request=createXHR();
+	   request.onreadystatechange=listener;
+		 request.open("POST","http://192.168.1.238:8080/testxml/student.action",true); 
+		 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		 request.send(params);
+	   }
+function createXHR(){
+	 //ie7+,ff,chrome,safari等
+	  if(typeof XMLHttpRequest!='undefined'){
+		  return new XMLHttpRequest();
+		  }
+		  else if(typeof ActiveObject!='undefined'){
+			  //ie早期版本 查看调用函数中是否存在一个activeXString的变量
+			  if(typeof arguments.callee.activeXString!='String'){
+				  var versions=['MSXML2.XMLHttp.6.0','MSXML2.XMLLHttp.3.0','MSXML2.XMLHttp'];
+				  for(var i=0,len=versions.length;i<len;i++){
+					  try{
+						  var xhr=new ActiveObject(versions[i]);
+						  arguments.callee.activeXString=versions[i];
+						  return xhr;
+						  }
+						  catch(e){
+							    //skip
+							  }
+					  }
+			  }
+				  return new ActiveXObject(arguments.callee.activeXString);
+				  }
+				  else{
+					   throw new Error('No XHR object available');
+					  }
+			   
+	 }
+	 var request;
+	 function listener(){
+		 if(request.readyState==4&&request.status==200){
+				//console.log("服务器正常响应...");
+				document.write(request.responseText);
+			}
+ 
+	 }
+	 yc.addEvent('showall','click',function(){
+		 request=createXHR();
+		 if(request){
+			 request.onreadystatechange=findAlllistener;
+			  request.open("POST","http://192.168.1.238:8080/testxml/student.action",true); 
+		 request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		 request.send("op=findAll");
+			 }
+		 });
+	function findAlllistener(){
+		if(request.readyState==4&&request.status==200){
+			var xml=request.responseXML;
+			var students=xml.getElementsByTagName('student');
+			for(var i=0;i<students.length;i++){
+				var s=students.length;
+				}
+			}
+		}
+    
+</script>
+</body>
+</html>

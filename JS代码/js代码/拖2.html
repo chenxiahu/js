@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1{width:200px;height:200px;background:#CC0;position:absolute;}
+</style>
+ 
+<script>
+window.onload=function(){
+	new Drag('div1');
+	};
+function Drag(id){
+	    var tthis=this;
+	    this.disX=0;
+        this.disY=0;
+	     this.oDiv=document.getElementById(id);
+	     this.oDiv.onmousedown=function(ev){
+			 tthis.Down(ev);
+		  };
+  		  
+};
+	Drag.prototype.Down=function(ev){
+		var tthis=this;
+		var oEvent=ev||event;
+		 this.disX=oEvent.clientX-this.oDiv.offsetLeft;
+		 this.disY=oEvent.clientY-this.oDiv.offsetTop;
+		document.onmousemove=function(ev){
+			tthis.Move(ev);
+		}
+	    document.onmouseup=function(){
+			tthis.Up();	
+		}
+		};
+		Drag.prototype.Move=function(ev){
+			var oEvent=ev||event;
+			this.oDiv.style.left=oEvent.clientX-this.disX+'px';
+			this.oDiv.style.top=oEvent.clientY-this.disY+'px';
+			};
+		Drag.prototype.Up=function(){
+			document.onmousemove=null;
+			document.onmouseup=null;
+			};
+	 
+	 
+ </script>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html >
+<head>
+<meta  charset="utf-8" />
+<title>jS正则表达式</title>
+<script>
+var str="a1b23c4565de2fg";
+for(var i=0;i<str.length;i++){
+	if(str[i]>0&&str[i]<9)
+	{
+	    document.write(str[i]); 
+	}
+	else if(str[i]<'z'&&str[i]>'a'){
+		  document.write(',');
+		}
+		 
+	}
+	function findNum(str){
+		var arr=[];
+		var temp="";
+		for(var i=0;arr.length;i++)
+		{
+			
+			}
+		};
+		 var reg=/a/;
+		 document.write(reg);
+		 var reg=new RegExp("abc","g");
+</script>
+<hr>
+<script>/*
+  \s:空格；
+  \d:数字;
+  \w：字符 (字母，数字，下划线);
+*/
+  var str="a32b32cxfdd2342dsfs675";
+ function findNum(str){
+	 var arr=[];
+	 var temp="";
+	 for(var i=0;i<str.length;i++)
+	 {
+		if(str.charAt(i)<='9'&&str.charAt(i)<'0')
+		{
+			temp+=str.charAt(i);
+			} 
+			else if(temp){
+				arr.push(temp);
+				temp="";
+				}
+				if(temp)
+				{
+					arr.push(temp);
+					temp='';
+					}
+					return arr;
+		}
+	 };
+document.write(findNum(str)+'<br>');
+var reg=/b/;
+console.log(reg.test(str));
+var reg=/\D/;
+if(reg.test(str)){
+	alert('不全是数字');
+	}else{
+		 alert('全是数字');
+		}
+		var str1="adsaf";
+		var reg1=/d/;
+	console.log(str1.search(reg1));
+    var str3="a2dsf5464dgd786dgs3";
+	var reg3=/\d/;
+	console.log(str.match(reg3));
+</script>
+</head>
+<body>
+
+</body>
+</html>

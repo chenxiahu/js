@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="pro">
+<table id="table" width="800">
+         <thead>
+         <tr>
+         <td>编号</td>
+         <td>商品名</td>
+         <td>价格</td>
+         <td>图像</td>
+         </tr>
+         </thead>
+         <tbody id="probody">
+         
+         </tbody>
+</table>
+<script>
+var result="{\"page\":1,\"rows\":10,\"commodity\":[{\"id\":1,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":2,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":3,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":4,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":5,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":6,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":7,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},{\"id\":8,\"name\":\"苹果\",\"price\":20.0,\"img\":\"1.jpg\"},]}";
+var robject=eval("("+result+")");
+var str="";
+for(var i=0;i<robject.commodity.length;i++){
+	 str+="<tr>";
+	 var c=robject.commodity[i];
+	 str+="<td>"+c.id+"</td><td>"+c.name+"</td><td>"+c.price+"</td><td><img src="+c.img+"/></td>";
+	 str+="</tr>";
+	}
+document.getElementById('probody').innerHTML=str;
+</script>
+</body>
+</html>

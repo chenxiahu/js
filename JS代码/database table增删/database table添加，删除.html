@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="yclib.js"></script>
+<script>
+ function del(obj){
+	  var tr=obj.parentNode.parentNode;
+	  var tbody=tr.parentNode;
+	  tbody.removeChild(tr);
+	  if(window.openDatabase){
+		  db.transaction(function(transaction){
+			  transaction.executeSql("delete from student where sid="+tr.firstChild.innerHTML,[]);
+			  });
+		  }
+	 }
+</script>
+
+</head>
+
+<body>
+<h1>添加学生</h1>
+<hr>
+<p>学号：<input type="text" name="sid" id="sid"/></p>
+<p>学生名：<input type="text" name="sname" id="sname"/></p>
+<p>年龄：<input type="text" name="age" id="age"/></p>
+<input type="button" id="btn" value="添加" />
+<hr>
+<table border="1" width="500px">
+   <thead>
+     <tr>
+         <td>学生号</td>
+         <td>学生名</td>
+         <td>年龄</td>
+         <td><input type="button" class="bt" value="操作（删除）" onClick="del(this)"/></td>
+     </tr>
+   </thead>
+   <tbody id="content">
+   </tbody>
+</table>
+<script>
+  var db;
+  if(window.openDatabase){
+	  db=openDatabase("stuInfo",1.0,"testdb",10000);
+	  db.transaction(function( transaction){
+		  transaction.executeSql("create table student(sid int primary key,sname text,age int)",[]);
+		  });
+	  }
+	window.onload=function(){
+		 yc.addEvent('btn','click',function(){
+			 var sid=yc.$('sid').value;
+			 var sname=yc.$('sname').value;
+			 var age=yc.$('age').value;
+			 
+			 var tbody=yc.$('content');
+			 
+			 var tdslen=document.getElementsByTagName('td');
+			 var newRow=tbody.insertRow(tbody.rows.length);
+			 var cell=newRow.insertCell(0);
+			 cell.innerHTML=sid;
+			 var cell1=newRow.insertCell(1);
+			 cell1.appendChild(document.createTextNode(sname));
+			  var cell2=newRow.insertCell(2);
+			 cell2.appendChild(document.createTextNode(age));
+			  var cell3=newRow.insertCell(3);
+			 cell3.innerHTML=tdslen[3].innerHTML;
+			 if(window.openDatabase){
+				 db.transaction(function(transaction){
+					 transaction.executeSql("insert into student(sid,sname,age)values(?,?,?)",[sid,sname,age]);
+					 });
+				 }
+			 });
+		}
+</script>
+</body>
+</html>

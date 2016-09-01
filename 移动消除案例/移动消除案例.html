@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#wrap{
+	width:500px;
+	height:500px;
+	background-image:url(1.jpg);
+	background-size:500px 500px;
+	position:relative;
+	}
+#wrap div{
+	width:50px;
+	height:50px;
+	background-image:url(file:///E|/%E6%BA%90%E7%A8%8B24/IE%E5%85%BC%E5%AE%B9/img/2.jpg);
+	background-size:50px 50px;
+	position:absolute;
+	transition:1s;
+	}
+</style>
+</head>
+<body>
+<div id="wrap"></div>
+<script>
+var wrap=document.getElementById('wrap');
+var l=0;
+var t=0;
+var str="";
+for(var i=0;i<100;i++){
+	l=(i%10)*50;
+	t=Math.floor(i/10)*50; 
+	str+="<div style='left:"+l+"px;top:"+t+"px;'></div>";
+	}
+	wrap.innerHTML=str;
+	var divs=wrap.getElementsByTagName('div');
+	for(var i=0;i<divs.length;i++){
+		divs[i].onmouseover=function(){
+			 this.style.opacity=0;
+			 this.style.transform="scale(0)";
+			}
+		}
+</script>
+ 
+</body>
+</html>

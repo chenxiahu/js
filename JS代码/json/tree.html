@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+ 
+</head>
+
+<body>
+<script>
+ function TreeItem(text,links,icon){
+	  this.text=text;
+	  this.icon=icon;
+	  this.links=links;
+	  this.sonItems=[];
+	 };
+	TreeItem.prototype={
+		addSonItem:function(sonItem){
+			  this.sonItems.push(sonItem);
+			},
+		 getSonItemCount:function( ){
+			 return this.sonItems.length;
+			 },
+		 getAllSonItem:function( ){
+			  return this.sonItems;
+			 },
+		showItem:function( parentNode){
+			        var root;
+			       if(this.sonItems.length<=0){
+					   root=document.createElement('li');
+					   if(this.links){
+						   var a=document.createElement('a');
+						   a.href=this.links;
+						   var txt=document.createTextNode(this.text);
+						   a.appendChild(txt);
+						   root.appendChild(a);
+						   }
+						   else{
+							    var txt=document.createTextNode(this.text);
+								root.appendChild(txt);
+							   }
+							   parentNode.appendChild(root);
+							  return;
+					   } 
+					   root=document.createElement('li');
+					   var txt=document.createTextNode(this.text);
+					   root.appendChild(txt);
+					   var ulnode=document.createElement('ul');
+					   root.appendChild(ulnode);
+					   for(var i=0;i<this.sonItems.length;i++){
+						   var si=this.sonItems[i];
+						   si.showItem(ulnode);
+						   alert(si);
+						   }
+						 parentNode.appendChild(root);
+						
+	     			 }
+				};
+	/*var tree=new TreeItem('root','','');
+	var t1=new TreeItem('t1','','');
+	var t2=new TreeItem('t2','','');
+	tree.addSonItem(t1);
+	tree.addSonItem(t2);
+ 
+	var t11=new TreeItem('t11','','');
+		var t22=new TreeItem('t22',"","");
+		t1.addSonItem(t11);
+		t1.addSonItem(t22);
+
+		var t111=new TreeItem('baidu','http://www.baidu.com','');
+		t11.addSonItem(t111);
+		var t21=new TreeItem('t21','','');
+		t2.addSonItem(t21);
+
+		 
+	tree.showItem(document.body);
+	alert(tree.addSonItem());
+	alert(tree.getSonItemCount());
+	alert(tree.sonItems);*/
+	function walk(parentNode,jsonarray){
+		 for(var i=0;i<jsonarray.length;i++){
+			  var jsonobject=jsonarray[i];
+			  var ti=new TreeItem(jsonobject.text,jsonobject.icon,jsonobject.links);
+			  parentNode.addSonItem(ti);
+			  if(jsonobject.sonItems!=null&&jsonobject.sonItems.length>0){
+				   walk(ti,jsonobject.sonItems);
+				  }
+			 }
+		
+		}
+	var result=" [{\"id\":1,\"text\":\"后台管理\",\"icon\":\"star\",\"sonItems\":[{\"id\":2,\"text\":\"用户管理\",\"sonItems\":[{\"id\":6,\"text\":\"用户浏览\",\"links\":\"xxx.com\"},{\"id\":7,\"text\":\"用户浏览\",\"links\":\"xxx.com\"},{\"id\":8,\"text\":\"用户浏览\",\"links\":\"xxx.com\"}]},{\"id\":3,\"text\":\"平台信息\",\"sonItems\":[]},{\"id\":4,\"text\":\"平台信息\",\"sonItems\":[]},{\"id\":5,\"text\":\"平台信息\",\"sonItems\":[]}]}]";
+	var jsonarray=eval("("+result+")");
+	var root;
+	if(jsonarray!=null&&jsonarray.length>0){
+		var rootobject=jsonarray[0];
+		root=new TreeItem(rootobject.text,rootobject.icon,rootobject.links);
+		if(rootobject.sonItems!=null&&rootobject.sonItems.length>0){
+			 walk(root,rootobject.sonItems);
+			}
+		}
+   root.showItem(document.body);
+</script>
+</body>
+
+</html>

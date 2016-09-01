@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<p id="result"></p>
+<script>
+function parseXML(str){
+//创建DOM解析器
+var xmlDoc;
+try{
+	 //ie
+	 xmlDoc=new ActiveXobject('Microsoft.XMLDOM');
+	 xmlDoc.async=false;//将加载方式设为同步方式
+	 xmlDoc.loadXML(str)
+	}catch(e){
+		try{
+			//Firefox,Mozilla,Opera,webkit.
+			var parser=parser.parseFromString(str,'text/xml');
+			}
+			catch(x){
+				alert(x.message);
+				return;
+				}
+		}
+		 
+return xmlDoc;
+}
+
+var xmlDOM=loadXML("heyyang.xml");
+ 
+document.getElementById('result').innerHTML=xmlDOM.getElementsByTagName('string')[0].childeNodes[0].nodeValue;
+</script>
+</body>
+</html>

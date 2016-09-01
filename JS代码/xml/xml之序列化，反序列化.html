@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<p id="result"></p>
+<script>
+function parseXML(str){
+//创建DOM解析器
+var xmlDoc;
+try{
+	 //ie
+	 xmlDoc=new ActiveXobject('Microsoft.XMLDOM');
+	 xmlDoc.async=false;//将加载方式设为同步方式
+	 xmlDoc.loadXML(str)
+	}catch(e){
+		try{
+			//Firefox,Mozilla,Opera,webkit.
+			var parser=new DOMParser();
+			var xmlDoc=parser.parseFromString(str,'text/xml');
+			
+			}
+			catch(x){
+				 
+				return;
+				}
+		}
+		 
+return xmlDoc;
+}
+var xmlStr="<customers><customer id='2'><name>李一</name><birthdata>March 10,1980</birthdata><email>aa@qq.com</email><phone>12442344</phone></customer><customer><name>李四</name><birthdata>March 10,1980</birthdata><email>aa@qq.com</email><phone>12442344</phone></customer></customers>";
+//将字符串xmlDOM变成 Xml document对象  序列化
+
+ var xmlDOM=parseXML(xmlStr);//xmlDOM->customer节点
+//将xml对象转化成string字符串 反序列化
+ function getElementByIdXML(rootnode,id){
+	nodeTags=rootnode.getElementsByTagName('*');
+	for(i=0;i<nodeTags.length;i++){
+		if(nodeTags[i].hasAttribute('id')){
+			if(nodeTags[i].getAttribute('id')==id){
+				return nodeTags[i];
+				}
+			}
+		}
+	}
+ customerNode=getElementByIdXML(xmlDOM,'2');  
+if(xmlDOM.xml){
+	document.getElementById('result').innerHTML=xmlDOM.xml;
+	}else{
+		 var serializer=new XMLSerializer();
+		 document.getElementById('result').innerHTML=serializer.serializeToString(xmlDOM,"text/xml");
+		}
+ 
+   
+</script>
+</body>
+</html>

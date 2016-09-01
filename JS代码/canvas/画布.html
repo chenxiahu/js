@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html" charset="utf-8">
+<title>画布</title>
+<style>
+#can{
+	border:1px solid #990;
+	}
+</style>
+<script>
+ var ca=document.getElementById("can");
+
+  var ctx=ca.getContext("2d");
+  ctx=ca.strokeStyle='rgb(255,0,0)';
+  ctx.beginPath();
+  ctx.moveTo(20,40);
+  ctx.lineTo(50,60);
+  ctx.closePath();
+  ctx.stroke();
+</script>
+</head>
+
+<body>
+<convas height="600px" width="500px" id="can"/>
+</body>
+</html>

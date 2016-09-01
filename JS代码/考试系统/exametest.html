@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <script src="yclib.js"></script>
+    <script src="考试系统.js"></script>
+    <script src="index.js"></script>
+     
+</head>
+<body>
+	<div id="questions"></div>
+    <script>
+	//                  表名     字段名  where条件  占位符   回调函数
+	sqlhelper.select("question","*",     "",      [],    get);
+	function get(rows){
+		 if(!rows||rows==false){
+			 //查询失败
+			  return;
+			 }
+		var queStr="[";
+		for(var i=0;i<rows.length;i++){
+			queStr+="[";
+			for(var tname in rows.item(i)){//rows.item[i]  取一行代表一个题目
+				if(rows.item(i).hasOwnProperty(tname)){
+					queStr+="'"+rows.item(i)[tname]+"'";
+					}
+				}
+			queStr=queStr.substr(0,queStr.length-1);
+			queStr+="],";
+			}
+		  queStr=queStr.substr(0,queStr.length-1);
+		  queStr+="]";
+		  que=eval(queStr);
+		  allque=new ShowQuestions(que);
+		  allque.showque();
+		}
+	</script>
+	<script type="text/javascript">
+		function ShowQuestions(questions){
+			this.que=questions;
+		}
+		var timer;
+		ShowQuestions.prototype={
+			showque:function(){
+				var ques=document.getElementById("questions");
+				//插入剩余时间的div
+				var timebox=document.createElement("div");
+				timebox.innerHTML="剩余时间(单位：秒):";
+				var time=document.createElement("span");
+				timebox.appendChild(time);  //<div>剩余时间(单位：秒):<span></span></div>
+				var settime=new Date().getTime()+8000;
+				timer=setInterval(function(){//给剩余时间设定一个定时器，保证实时更新
+					var innertime=parseInt((settime-new Date().getTime())/1000);
+					if(innertime==0){
+						clearInterval(timer);
+						submit(timer);
+					}
+					time.innerHTML=innertime;
+				}, 50);
+				document.body.insertBefore(timebox,ques);
+
+				//插入所有的题目
+				for(var i=0;i<this.getTotal();i++){
+					var num=document.createElement("span");
+					num.id="q"+i;
+					num.innerHTML=this.que[i][0]+"、"; //<span id="q1">1、</span>
+					ques.appendChild(num);
+					var question=document.createElement("span");
+					question.innerHTML=this.que[i][1];
+					ques.appendChild(question); //<span>xxxxxx</span>
+					var options=document.createElement("p");//当前题目选项
+					for(var j=0;j<4;j++){
+						var inp=document.createElement("input");
+						inp.type="radio";
+						inp.name="ans"+i;
+						inp.value=j+1;
+						//<p><input type="radio" name="ans1" value="1"/><span>xxxx</span></p>
+						//<p><input type="radio" name="ans1" value="2"/><span>xxxx</span></p>
+						//<p><input type="radio" name="ans1" value="3"/><span>xxxx</span></p>
+						//<p><input type="radio" name="ans1" value="4"/><span>xxxx</span></p>
+					   (function(i,j){
+						   yc.addEvent(inp,'change',function(){
+							   //i 题号，对应数组的下标
+							   //j 对应了选项。
+							   ansarr[i]=j+1;
+							   sqlhelper.exesql("insert into answer(num,answer) values(1,'"+ansarr.join()+"')"); 
+							   })
+						   })(i,j);
+						var ans=document.createElement("span");
+						ans.innerHTML="&#"+(65+j)+";、"+this.que[i][2+j];
+
+						options.appendChild(inp);
+						options.appendChild(ans);
+					}
+					ques.appendChild(options);
+					ques.appendChild(document.createElement("hr"));
+				}
+
+				var btn=document.createElement("input");
+				btn.type="button";
+				btn.value="提交试卷";
+				btn.onclick=submit;
+				ques.appendChild(btn);
+				var getlastans=document.createElement('button');
+				getlastans.innerHTML="恢复上次答案";
+				getlastans.onclick=function(){
+					sqlhelper.select("answer","answer","num=?",[1],showlastans);
+					yc.prependChild(document.body.getlastans);
+					}
+					
+			},
+			getTotal:function(){
+				return this.que.length;
+			}
+		}	
+		function showlastans(rows){
+			if(!rows||rows==false){
+				return;
+				}
+			var allp=rows.item(0).answer;
+			answer=answer.split(',');
+			var allp=document.getElementsByTagName('p');
+			for(var i=0;i<allp.length;i++){
+				var allopt=allp[i].getElementsByTagName('input');
+				for(var j=0;j<allopt.length;j++){
+					if(answer[i]==j+1){
+						allopt[j].checked=true;
+						}
+					}
+				}
+			}
+		
+		function submit(){
+			clearInterval(timer); //关闭定时器
+
+
+			//取消页面中所有的input元素的操作
+			var allinput=document.getElementsByTagName("input");
+			for(var i=0;i<allinput.length;i++){
+				allinput[i].disabled=true;
+			}
+			var ans=[];
+			for(var i=0;i<allque.que.length;i++){
+				var num="ans"+i; //ans1
+				var answer=document.getElementsByName(num); //查到每一题的四个单选框
+				var flag=true;
+				//循环四个单选框 radio
+				//for(var j=0;i<answer.length;j++){!!!!!!!!!!!找了两个星期的错误，竟然是这样的
+				  for(var j=0;j<answer.length;j++){
+					if(answer[j].checked){
+						ans.push(answer[j].value);
+						flag=false;//用户选了答案
+					}
+				}
+				//当前这一题用户没有选择答案，则将ans数组中对应的位置设置0
+				if(flag){
+					ans.push("0");
+				}
+			}
+
+			var score=0;
+			for(var i=0;i<allque.que.length;i++){
+				if(ans[i]==allque.que[i][6]){
+					score+=10;
+				}
+			}
+			//console.log(score);
+			var newpage="submit2.html#"+(allque.que.length*10)+"_"+score;
+			window.open(newpage,"new window","width=300,height=300");
+			//close();
+		}
+
+		var que=[
+		[1,"中国的首都?","北京","长沙","上海","衡阳","1"],
+		[2,"中国的首都?","北京","长沙","上海","衡阳","1"],
+		[3,"中国的首都?","北京","长沙","上海","衡阳","1"],
+		[4,"中国的首都?","北京","长沙","上海","衡阳","1"],
+		];
+		var allque=new ShowQuestions(que);
+		allque.showque();
+	</script>
+	
+</body>
+</html>

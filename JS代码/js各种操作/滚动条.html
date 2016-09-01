@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{padding:0px;
+   margin:0px auto;
+  }
+  #mainContent{
+	  width:200px;
+	  height:300px;
+	  border:1px solid #ccc;
+	  margin-top:20px;
+	 overflow:scroll;
+	  }
+	 
+	li{
+		list-style:none;
+		text-align:center;}
+         #showhidden{
+			width:100%;
+			height:20px;
+			background:#3cf;
+			}
+</style>
+</head>
+
+<body>
+<div id="mainContent">
+<div id="myContent">
+  <ul>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  <li>你好你好你好你好</li>
+  </ul>
+</div>
+<div id="showhidden" style="display:none">
+<p>加载中，请稍后。。。。</p>
+</div>
+<script>
+   var obj=document.getElementById('mainContent');
+   obj.onscroll=function(){
+	     var scrollH=obj.scrollHeight;
+		 var scrollT=obj.scrollTop;
+		 var clientH=obj.clientHeight;
+		 console.log("crollHeight:"+'<br>'+scrollH+"<br>"+"ScrollT"+scrollT+"<br>"+"clientH"+clientH);
+		 if(scrollH==scrollT+clientH)
+		 {
+			 var sh=document.getElementById('showhidden');
+			 sh.style.display='block';
+			 window.setTimeout('frush()',1000);
+			 }
+	   }
+	   function frush(){
+		    var newdiv=document.createElement('div');
+			var newul=document.createElement('ul');
+			for(var i=0;i<16;i++){
+				 var newli=document.createElement('li');
+				 newli.innnerHTML="scrol-scro-1-scrol";
+				 newul.appendChild(newli);
+				}
+				newdiv.appendChild(newli);
+				var sh=document.getElementById('showhidden');
+				obj.insertBefore(newdiv,sh);
+		   }
+</script>
+</body>
+</html>

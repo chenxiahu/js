@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="lib.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj=yc.parseJSON('{"name":"a","age":20}');
+		alert(obj.name+"   "+obj.age);
+
+		obj=yc.parseJSON('{"name":"a","age":20,"date":200000}',function(key,value){
+			return key.indexOf('date') >=0 ? new Date(value) : value});
+		alert(obj.name+"   "+obj.age+"   "+obj.date);
+
+	</script>
+</body>
+</html>

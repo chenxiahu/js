@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#mydiv{display:none;
+        position:absolute;
+		left:0px;
+		top:0;
+		background:#fff;
+		color:lime;
+		border:1px solid gray;
+		padding:5px;}
+		#txt{width:800px;
+		height:600px;
+		border:none;
+		}
+		.span1{
+			display:block;
+			width:14px;
+			height:11px;
+			background:#fff url(http://static.wenku.bdimg.com/static/wkview/widget/api_share
+			/img/pane1_514568c.png no-repeat:0 -30px);
+			position:absolute;
+			top:601px;
+			left:10px;
+			z-index:9999;
+			}
+			.div1{background:#fff;
+			border:1px solid #ccc;}
+</style>
+</head>
+
+<body>
+<textarea id="txt" readonly="yes">测试文字</textarea>
+<div id="mydiv">复制|搜索|翻译|百科|分享|二维码</div>
+<span class="span1"></span>
+<div class="div1">复制|搜索|翻译|百科|分享|二维码</div>
+<script>
+  var txt=document.getElementById('txt');
+  var mydiv=document.getElementById('mydiv');
+  var x,y=0;
+  txt.onselect=function(){
+	   mydiv.style.display='block';
+	   mydiv.style.left=x+'px';
+	   mydiv.style.top=y+10+'px';
+  }
+ txt.onmouseup= function(event){
+	  var e=event?event:window.event;
+	   x=e.clientX;
+	   y=e.clientY;
+	 }
+	 document.onmousedown=function(){
+		  mydiv.style.display='none';
+		 }
+</script>
+</body>
+</html>

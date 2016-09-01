@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="yclib.js"></script>
+<style>
+@import 'a.css';
+</style>
+</head>
+
+<body>
+<script>
+function show(){
+	var importrules;
+	if(document.styleSheets[0].cssRules[0].styleSheet.cssRules){
+		importrules=document.styleSheets[0].cssRules[0].styleSheet.cssRules;
+		}
+	 else{
+		  importrules=document.styleSheets[0].imports[0].rules;
+		 }
+	  alert(importrules.length);
+	}
+	show();
+</script>
+</body>
+</html>
