@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dom</title>
+<style>
+#div1{width:200px;height=200px;background:#F00;margin:100px;position:relative;}
+#div2{width:100px;height=100px;background:#099;position:absolute;left:50px;top:50px;}
+</style>
+<script>
+/* <script>
+window.onload=function(){
+	var oUl=document.getElementById('ull');
+	//IE6-8
+	//alert(oUl.childNodes.length);
+	for(var i=0;i<oUl.childNodes.length;i++)
+	{
+		 //oUl.childNodes[i].style.background='red';
+		if(oUl.childNodes[i].nodeType==1)
+		{
+			oUl.childNodes[i].style.background='red';
+			}
+		} 
+	};
+	*/
+</script>
+ 
+<hr>
+<script type="text/javascript">
+window.onload=function(){
+//var oUl=document.getElementById('ull');
+var aA=document.getElementsByTagName('a');
+for(var i=0;i<aA.length;i++)
+{
+	aA[i].onclick=function(){
+		this.parentNode.style.display='none';
+		};
+	
+	} 
+};
+ 
+</script>
+</head>
+
+<body>
+<ul id="ull" >
+<li>adfasafds<a href="javascript:;">隐藏</a></li>
+<li>1231<a href="#">隐藏</a></li>
+<li>aerwr<a href="#">隐藏</a></li>
+<li>cvbnc<a href="#">隐藏</a></li>
+</ul>
+fafa...文本节点
+<span></span>//元素节点
+ <div id="div1">
+ <div id="div2"></div>
+ </div>
+</body>
+</html>

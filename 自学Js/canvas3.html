@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+body{
+	margin:0px;
+	padding:0px;
+	}
+	#mycanvas{
+	border:1px solid #0F3;
+	background-color:#936;
+	}
+	
+</style>
+<script>
+   window.onload=function(){
+	var canvas=document.getElementById('mycanvas');
+	var context=canvas.getContext('2d');
+	//绘制弧线
+	context.beginPath();
+	context.moveTo(20,20);
+	context.lineTo(100,20);
+	context.arcTo(150,20,150,70,50);
+	context.lineTo(150,120);
+	context.stroke();
+	//绘制第二次贝塞尔曲线
+	context.beginPath();
+	context.moveTo(200,canvas.height/2);
+	context.quadraticCurveTo(288,0,388,50);
+	contextWidth=5;
+	context.strokeStyle='blue';
+	context.stroke();
+	//第三次贝塞尔曲线
+	context.beginPath();
+	context.moveTo(500,130);
+	context.bezierCurveTo(400,10,588,10,688,170);
+	contextWidth=5;
+	context.strokeStyle='blue';
+	context.stroke();
+   }
+ </script>
+</head>
+
+<body>
+<canvas id="mycanvas" width="578" height="200" ></canvas>
+</body>
+</html>

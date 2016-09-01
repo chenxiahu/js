@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DOM</title>
+<script>
+window.onload=function(){
+	var oTxt=document.getElementById('txt');
+	var oUl=document.getElementById('ull');
+	var oBtn=document.getElementById('btn1');
+	oBtn.onclick=function(){
+		var oLi=document.createElement('li');
+		var aLi=document.getElementsByTagName('li');
+		oLi.innerHTML=oTxt.value;
+		oUl.appendChild(oLi);
+		oUl.insertBefore(oLi,aLi[0]);
+		}
+	}
+</script>
+</head>
+
+
+<body>
+<input type="text" id="txt" />
+<input id="btn1" type="button" value="创建li"/>
+<ul id="ull">
+</ul>
+</body>
+</html>
